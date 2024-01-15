@@ -16,7 +16,7 @@ model User {
   profile     Profile?
   posts       Post[]
   comments    Comment[]
-  username    String  @unique @db.VarChar(10)
+  username    String    @unique @db.VarChar(10)
   email       String
   password    String
   createdAt   DateTime  @default(now())
@@ -24,14 +24,14 @@ model User {
 }
 
 model Profile {
-  id          Int     @id @default(autoincrement())
-  userId      Int     @unique
-  user        User    @relation(fields:[userId], references:[id])
-  firstName   String  @db.VarChar(255)
-  lastName    String  @db.VarChar(255)
+  id          Int       @id @default(autoincrement())
+  userId      Int       @unique
+  user        User      @relation(fields:[userId], references:[id])
+  firstName   String    @db.VarChar(255)
+  lastName    String    @db.VarChar(255)
   profileUrl  String
   dob         DateTime?
-  biography   String  @db.VarChar(120)
+  biography   String    @db.VarChar(120)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }
@@ -39,9 +39,9 @@ model Profile {
 model Post {
   id          Int       @id @default(autoincrement())
   userId      Int
-  user        User    @relation(fields:[userId], references:[id])
+  user        User      @relation(fields:[userId], references:[id])
   comments    Comment[]
-  title       String  @db.VarChar(150)
+  title       String    @db.VarChar(150)
   content     String
   pictureUrl  String?
   published   Boolean   @default(false)
@@ -53,10 +53,10 @@ model Post {
 model Comment {
   id          Int       @id @default(autoincrement())
   userId      Int
-  user        User    @relation(fields:[userId], references:[id])
+  user        User      @relation(fields:[userId], references:[id])
   postId      Int
-  post        Post    @relation(fields:[postId], references:[id])
-  content     String  @db.VarChar(250)
+  post        Post      @relation(fields:[postId], references:[id])
+  content     String    @db.VarChar(250)
   upvotes     Int
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
