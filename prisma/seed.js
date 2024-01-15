@@ -1,6 +1,19 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
+const { LoremIpsum } = require('lorem-ipsum')
+
+const lorem = new LoremIpsum({
+    sentencesPerParagraph: {
+        max: 8,
+        min: 4
+    },
+    wordsPerSentence: {
+        max: 16,
+        min: 4
+    }
+});
+
 async function seed() {
     const createdUsers = await prisma.user.createMany({
         data: [
@@ -49,7 +62,7 @@ async function seed() {
                 title: i+'Ljsahdjahsdj',
                 content: 'ajsjhajdasd',
                 pictureUrl: '',
-                published: !!Math.random() > 0.5,
+                published: !!(Math.random() > 0.5),
                 upvotes: parseInt(Math.random()*100)
             })
         }
@@ -61,6 +74,22 @@ async function seed() {
 
     console.log('created posts', createPosts)
 
+    const comments = []
+
+    for (let i = 0; i < 50; i++) {
+        comments.push({
+            userId: Math.random() > 0.5 ? 1 : 2,
+            postId: parseInt(Math.random() * 9)+1,
+            content: lorem.generateSentences(1),
+            upvotes: parseInt(Math.random() * 4)
+        })
+    }
+
+    const createComments = await prisma.comment.createMany({
+        data: comments
+    })
+
+    console.log('created comments', createComments)
     // Don't edit any of the code below this line
     process.exit(0);
 }
