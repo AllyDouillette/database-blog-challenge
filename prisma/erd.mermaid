@@ -5,8 +5,9 @@ title: ERD blog
 erDiagram
     USER {
         int id
-        string  email
-        string  password
+        string username
+        string email
+        string password
         date createdAt
         date updatedAt
     }
@@ -29,7 +30,7 @@ erDiagram
         date createdAt
         date updatedAt
     }
-    USER ||--o{ COMMENT : writes
+    USER ||--o{ COMMENT: writes
     COMMENT {
         int id
         string body
