@@ -38,3 +38,11 @@ model Post {
   updatedAt   DateTime  @updatedAt
   upvotes     Int
 }
+
+model Comment {
+  id          Int       @id @default(autoincrement())
+  body        String
+  upvotes     Int
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
