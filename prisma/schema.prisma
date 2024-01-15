@@ -13,6 +13,7 @@ datasource db {
 
 model User {
   id          Int       @id @default(autoincrement())
+  profile     Profile?
   username    String.Varchar(10)  @unique
   email       String
   password    String
@@ -22,6 +23,8 @@ model User {
 
 model Profile {
   id          Int     @id @default(autoincrement())
+  userId      Int
+  user        User    @relation(fields:[userId], references:[id])
   firstName   String.Varchar(255)
   lastName    String.Varchar(255)
   profileUrl  String
