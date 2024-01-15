@@ -42,7 +42,7 @@ model Post {
   user        User    @relation(fields:[userId], references:[id])
   comments    Comment[]
   title       String  @db.VarChar(150)
-  body        String
+  content     String
   pictureUrl  String?
   published   Boolean   @default(false)
   createdAt   DateTime  @default(now())
