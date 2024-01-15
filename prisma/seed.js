@@ -20,9 +20,17 @@ async function seed() {
     console.log(`${createdUsers.count} users created`, createdUsers);
 
     // Add your code here
-    
+    const createProfile = await prisma.profile.create({
+        data: {
+                firstName: 'alice',
+                lastName: 'wondaaa',
+                userId: 1,
+                profileUrl: '',
+                biography: ''
+            }
+    })
 
-
+    console.log('created profile', createProfile)
     // Don't edit any of the code below this line
     process.exit(0);
 }
